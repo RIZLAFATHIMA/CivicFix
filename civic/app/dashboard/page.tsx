@@ -53,146 +53,7 @@ interface Issue {
   reportedByUserId?: number; // From database
 }
 
-const mockIssues: Issue[] = [
-  {
-    id: "ISS001",
-    title: "Pothole on Main Street",
-    description:
-      "Large pothole causing damage to vehicles near the intersection of Main St and 5th Ave",
-    category: "infrastructure",
-    priority: "high",
-    status: "open",
-    location: "Main St & 5th Ave",
-    reportedBy: "John Doe",
-    reportedDate: "2025-07-25",
-    votes: 23,
-    images: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop&auto=format&crop=focalpoint&fp-x=0.7&fp-y=0.3",
-    ],
-    reporterAvatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
-  },
-  {
-    id: "ISS002",
-    title: "Broken Street Light",
-    description:
-      "Street light has been out for 2 weeks, creating safety concerns for pedestrians",
-    category: "safety",
-    priority: "medium",
-    status: "in-progress",
-    location: "Oak Street, Block 200",
-    reportedBy: "Sarah Smith",
-    reportedDate: "2025-07-20",
-    assignedTo: "City Maintenance",
-    votes: 15,
-    images: [
-      "https://images.unsplash.com/photo-1541411735051-2c7c2ba7fa8b?w=400&h=300&fit=crop",
-    ],
-    reporterAvatar:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b15c?w=40&h=40&fit=crop&crop=face",
-  },
-  {
-    id: "ISS003",
-    title: "Illegal Dumping Site",
-    description: "Construction debris and household waste dumped in vacant lot",
-    category: "environment",
-    priority: "high",
-    status: "open",
-    location: "Vacant lot, Pine St",
-    reportedBy: "Mike Johnson",
-    reportedDate: "2025-07-28",
-    votes: 31,
-    images: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=300&fit=crop",
-    ],
-    reporterAvatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
-  },
-  {
-    id: "ISS004",
-    title: "Bus Stop Shelter Damaged",
-    description: "Glass panels broken, bench damaged, needs repair",
-    category: "transportation",
-    priority: "low",
-    status: "resolved",
-    location: "Bus Stop #47, Central Ave",
-    reportedBy: "Lisa Wang",
-    reportedDate: "2025-07-15",
-    assignedTo: "Transit Authority",
-    votes: 8,
-    images: [
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
-    ],
-    reporterAvatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
-  },
-  {
-    id: "ISS005",
-    title: "Water Main Leak",
-    description: "Water bubbling up from street, possible water main break",
-    category: "utilities",
-    priority: "critical",
-    status: "in-progress",
-    location: "Elm Street, near #450",
-    reportedBy: "Robert Chen",
-    reportedDate: "2025-07-30",
-    assignedTo: "Water Department",
-    votes: 42,
-    images: [
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=300&fit=crop",
-    ],
-    reporterAvatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face",
-  },
-];
-
-// Add some issues reported by current user (will be updated dynamically)
-const getUserSpecificIssues = (currentUser: string): Issue[] => [
-  {
-    id: "ISS006",
-    title: "Broken Traffic Signal",
-    description: "Traffic light stuck on red for 30+ minutes during peak hours",
-    category: "infrastructure",
-    priority: "high",
-    status: "open",
-    location: "Main St & Oak Ave",
-    reportedBy: currentUser,
-    reportedDate: "2025-07-31",
-    votes: 12,
-    images: [
-      "https://images.unsplash.com/photo-1549317336-206569e8475c?w=400&h=300&fit=crop",
-    ],
-    reporterAvatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
-  },
-  {
-    id: "ISS007",
-    title: "Graffiti on Public Building",
-    description:
-      "Offensive graffiti on city hall exterior wall facing the main street",
-    category: "environment",
-    priority: "medium",
-    status: "in-progress",
-    location: "City Hall, Front Entrance",
-    reportedBy: currentUser,
-    reportedDate: "2025-07-29",
-    assignedTo: "City Maintenance",
-    votes: 8,
-    images: [
-      "https://images.unsplash.com/photo-1541411735051-2c7c2ba7fa8b?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
-    ],
-    reporterAvatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
-  },
-];
-
-const getAllIssues = (currentUser: string) => [
-  ...mockIssues,
-  ...getUserSpecificIssues(currentUser),
-];
+// No mock data - only real issues from database will be shown
 
 const Dashboard: React.FC = () => {
   const [currentUser, setCurrentUser] = useState("John Doe");
@@ -204,6 +65,10 @@ const Dashboard: React.FC = () => {
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
   const [loading, setLoading] = useState(true);
+  const [votedIssues, setVotedIssues] = useState<Set<string>>(new Set());
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [contactIssue, setContactIssue] = useState<Issue | null>(null);
+  const [contactMessage, setContactMessage] = useState("");
 
   // Load user data from localStorage and fetch issues
   useEffect(() => {
@@ -277,17 +142,7 @@ const Dashboard: React.FC = () => {
     return currentUserRole === "admin" || currentUserRole === "super-admin";
   };
 
-  // Function to toggle user role (for testing purposes)
-  const toggleUserRole = () => {
-    if (currentUserRole === "user") {
-      setCurrentUserRole("admin");
-      setCurrentUser("Admin User");
-    } else {
-      setCurrentUserRole("user");
-      setCurrentUser("John Doe");
-    }
-    setIssues(getAllIssues(currentUserRole === "user" ? "Admin User" : "John Doe"));
-  };
+
 
   // Logout function
   const handleLogout = () => {
@@ -392,21 +247,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const addSampleImage = () => {
-    const sampleImages = [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1541411735051-2c7c2ba7fa8b?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1549317336-206569e8475c?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
-    ];
-    const randomImage =
-      sampleImages[Math.floor(Math.random() * sampleImages.length)];
-    setNewIssueForm({
-      ...newIssueForm,
-      images: [...newIssueForm.images, randomImage],
-    });
-  };
+
 
   const removeImage = (index: number) => {
     setNewIssueForm({
@@ -465,6 +306,146 @@ const Dashboard: React.FC = () => {
     setSelectedIssue(null);
   };
 
+  // Upvote functionality
+  const handleUpvote = async (issueId: string) => {
+    try {
+      // Check if user already voted
+      if (votedIssues.has(issueId)) {
+        alert('You have already voted for this issue');
+        return;
+      }
+
+      // Update local state immediately for better UX
+      setIssues(prevIssues => 
+        prevIssues.map(issue => 
+          issue.id === issueId 
+            ? { ...issue, votes: issue.votes + 1 }
+            : issue
+        )
+      );
+      setVotedIssues(prev => new Set([...prev, issueId]));
+
+      // Send vote to backend
+      const response = await fetch('/api/issues/vote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          issueId,
+          userId: currentUserId
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Revert local state if backend call failed
+        setIssues(prevIssues => 
+          prevIssues.map(issue => 
+            issue.id === issueId 
+              ? { ...issue, votes: issue.votes - 1 }
+              : issue
+          )
+        );
+        setVotedIssues(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(issueId);
+          return newSet;
+        });
+        alert('Error upvoting issue: ' + data.error);
+      }
+      
+    } catch (error) {
+      console.error('Error upvoting issue:', error);
+      alert('Error upvoting issue. Please try again.');
+    }
+  };
+
+  // Contact reporter functionality
+  const handleContactReporter = (issue: Issue) => {
+    setContactIssue(issue);
+    setShowContactModal(true);
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!contactIssue || !contactMessage.trim()) {
+      alert('Please enter a message');
+      return;
+    }
+
+    try {
+      // Send message to backend
+      const response = await fetch('/api/issues/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          issueId: contactIssue.id,
+          fromUserId: currentUserId,
+          fromUserName: currentUser,
+          toUserId: contactIssue.reportedByUserId,
+          toUserName: contactIssue.reportedBy,
+          message: contactMessage
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Message sent to ${contactIssue.reportedBy}!\n\nMessage: ${contactMessage}`);
+        
+        // Reset form
+        setContactMessage("");
+        setShowContactModal(false);
+        setContactIssue(null);
+      } else {
+        alert('Error sending message: ' + data.error);
+      }
+      
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Error sending message. Please try again.');
+    }
+  };
+
+  const closeContactModal = () => {
+    setShowContactModal(false);
+    setContactIssue(null);
+    setContactMessage("");
+  };
+
+  const handleDeleteIssue = async (issueId: string) => {
+    if (window.confirm('Are you sure you want to delete this issue? This action cannot be undone.')) {
+      try {
+        const response = await fetch(`/api/issues/${issueId}`, {
+          method: 'DELETE',
+        });
+        
+        if (response.ok) {
+          // Remove the issue from the local state
+          setIssues(prevIssues => prevIssues.filter(issue => issue.id !== issueId));
+          alert('Issue deleted successfully');
+        } else {
+          const error = await response.json();
+          alert(`Error deleting issue: ${error.error}`);
+        }
+      } catch (error) {
+        console.error('Delete issue error:', error);
+        alert('Error deleting issue. Please try again.');
+      }
+    }
+  };
+
+  const handleEditIssue = (issue: Issue) => {
+    // For now, we'll just show an alert. In a full implementation,
+    // this would open an edit modal with the issue data pre-filled
+    alert('Edit functionality will be implemented in the next update. For now, you can delete and recreate the issue.');
+  };
+
   // Map-related functions
   const handleMapClick = (lat: number, lng: number) => {
     setNewIssueForm({
@@ -475,48 +456,98 @@ const Dashboard: React.FC = () => {
   };
 
   const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setUserLocation({ lat: latitude, lng: longitude });
-          setNewIssueForm({
-            ...newIssueForm,
-            coordinates: { lat: latitude, lng: longitude },
-            location: `Current Location (${latitude.toFixed(
-              6
-            )}, ${longitude.toFixed(6)})`,
-          });
-        },
-        (error) => {
-          console.error("Geolocation error:", error);
-          let errorMessage = "Unable to get your location. ";
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              errorMessage += "Location access was denied.";
-              break;
-            case error.POSITION_UNAVAILABLE:
-              errorMessage += "Location information is unavailable.";
-              break;
-            case error.TIMEOUT:
-              errorMessage += "Location request timed out.";
-              break;
-            default:
-              errorMessage += "An unknown error occurred.";
-              break;
-          }
-          alert(errorMessage + " Please select manually on the map.");
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 300000, // 5 minutes
-        }
-      );
-    } else {
+    if (!navigator.geolocation) {
       alert(
         "Geolocation is not supported by this browser. Please select manually on the map."
       );
+      return;
+    }
+
+    // Show loading state
+    setNewIssueForm(prev => ({
+      ...prev,
+      location: "Getting your location..."
+    }));
+
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 15000, // Increased timeout
+      maximumAge: 300000, // 5 minutes
+    };
+
+    const successCallback = (position: GeolocationPosition) => {
+      try {
+        const { latitude, longitude } = position.coords;
+        
+        // Validate coordinates
+        if (latitude === null || longitude === null || 
+            isNaN(latitude) || isNaN(longitude)) {
+          throw new Error("Invalid coordinates received");
+        }
+
+        setUserLocation({ lat: latitude, lng: longitude });
+        setNewIssueForm(prev => ({
+          ...prev,
+          coordinates: { lat: latitude, lng: longitude },
+          location: `Current Location (${latitude.toFixed(6)}, ${longitude.toFixed(6)})`,
+        }));
+      } catch (error) {
+        console.error("Error processing geolocation:", error);
+        alert("Error processing location data. Please select manually on the map.");
+        
+        // Reset location field on error
+        setNewIssueForm(prev => ({
+          ...prev,
+          location: ""
+        }));
+      }
+    };
+
+    const errorCallback = (error: GeolocationPositionError) => {
+      console.error("Geolocation error:", error);
+      
+      let errorMessage = "Unable to get your location. ";
+      
+      // Check if error object has proper structure
+      if (error && typeof error.code === 'number') {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage += "Location access was denied. Please allow location access in your browser settings.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage += "Location information is unavailable. Please try again or select manually on the map.";
+            break;
+          case error.TIMEOUT:
+            errorMessage += "Location request timed out. Please try again or select manually on the map.";
+            break;
+          default:
+            errorMessage += "An unknown error occurred. Please select manually on the map.";
+            break;
+        }
+      } else {
+        errorMessage += "Location service failed. Please select manually on the map.";
+      }
+      
+      alert(errorMessage);
+      
+      // Reset location field
+      setNewIssueForm(prev => ({
+        ...prev,
+        location: ""
+      }));
+    };
+
+    try {
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+    } catch (error) {
+      console.error("Geolocation API error:", error);
+      alert("Geolocation service is not available. Please select manually on the map.");
+      
+      // Reset location field
+      setNewIssueForm(prev => ({
+        ...prev,
+        location: ""
+      }));
     }
   };
 
@@ -564,6 +595,7 @@ const Dashboard: React.FC = () => {
     if (activeTab === "resolved" && issue.status !== "resolved") {
       return false;
     }
+
 
     const matchesSearch =
       issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -693,22 +725,18 @@ const Dashboard: React.FC = () => {
               {/* User Profile */}
               <div className="flex items-center space-x-4 bg-white/80 backdrop-blur-lg rounded-2xl px-6 py-3 shadow-xl border border-white/40 hover:bg-white/90 transition-all duration-300">
                 <div className="flex items-center space-x-3">
-                  <button
-                    onClick={toggleUserRole}
-                    className={`relative px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 transform hover:scale-105 ${
-                      isAdmin()
-                        ? "bg-gradient-to-r from-purple-500 to-violet-600 text-white shadow-lg hover:shadow-xl"
-                        : "bg-gradient-to-r from-blue-500 to-cyan-600 text-white shadow-lg hover:shadow-xl"
-                    }`}
-                    title="Click to toggle between User and Admin roles"
-                  >
+                  <div className={`relative px-4 py-2 rounded-xl text-sm font-bold ${
+                    isAdmin()
+                      ? "bg-gradient-to-r from-purple-500 to-violet-600 text-white shadow-lg"
+                      : "bg-gradient-to-r from-blue-500 to-cyan-600 text-white shadow-lg"
+                  }`}>
                     <div className={`absolute inset-0 rounded-xl blur opacity-30 ${
                       isAdmin() 
                         ? "bg-gradient-to-r from-purple-400 to-violet-500" 
                         : "bg-gradient-to-r from-blue-400 to-cyan-500"
                     }`}></div>
                     <span className="relative">{isAdmin() ? "👨‍💼 Admin" : "👤 User"}</span>
-                  </button>
+                  </div>
                   <div className="hidden sm:block">
                     <p className="text-sm font-bold text-gray-900">{currentUser}</p>
                     <p className="text-xs text-gray-500">Online now</p>
@@ -725,17 +753,19 @@ const Dashboard: React.FC = () => {
                 </button>
               </div>
               
-              {/* CTA Button */}
-              <button
-                onClick={() => setShowNewIssueModal(true)}
-                className="relative group bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-600 hover:from-violet-700 hover:via-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 rounded-2xl blur opacity-40 group-hover:opacity-60 transition-opacity duration-300"></div>
-                <span className="relative flex items-center space-x-2">
-                  <span className="animate-pulse">✨</span>
-                  <span>New Issue</span>
-                </span>
-              </button>
+              {/* CTA Button - Only show for non-admin users */}
+              {!isAdmin() && (
+                <button
+                  onClick={() => setShowNewIssueModal(true)}
+                  className="relative group bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-600 hover:from-violet-700 hover:via-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 rounded-2xl blur opacity-40 group-hover:opacity-60 transition-opacity duration-300"></div>
+                  <span className="relative flex items-center space-x-2">
+                    <span className="animate-pulse">✨</span>
+                    <span>New Issue</span>
+                  </span>
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -769,7 +799,7 @@ const Dashboard: React.FC = () => {
                 </span>
               </button>
               
-              {/* Role-based second tab */}
+              {/* Role-based tabs for admin */}
               {isAdmin() ? (
                 <button
                   onClick={() => setActiveTab("resolved")}
@@ -1174,8 +1204,17 @@ const Dashboard: React.FC = () => {
                             </span>
                           </div>
                           <div className="flex items-center gap-2 text-sm">
-                            <button className="flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors">
-                              <span>👍</span>
+                            <button 
+                              onClick={() => handleUpvote(issue.id)}
+                              disabled={votedIssues.has(issue.id)}
+                              className={`flex items-center gap-1 px-3 py-1 rounded-full transition-colors ${
+                                votedIssues.has(issue.id)
+                                  ? 'bg-green-100 text-green-700 cursor-not-allowed'
+                                  : 'bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-105 transform'
+                              }`}
+                              title={votedIssues.has(issue.id) ? 'Already voted' : 'Click to upvote'}
+                            >
+                              <span>{votedIssues.has(issue.id) ? '✅' : '👍'}</span>
                               <span className="font-medium">{issue.votes}</span>
                             </button>
                           </div>
@@ -1196,10 +1235,16 @@ const Dashboard: React.FC = () => {
                     {activeTab === "my-issues" &&
                     issue.reportedBy === currentUser ? (
                       <>
-                        <button className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm font-medium">
+                        <button 
+                          onClick={() => handleEditIssue(issue)}
+                          className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm font-medium"
+                        >
                           ✏️ Edit Issue
                         </button>
-                        <button className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm font-medium">
+                        <button 
+                          onClick={() => handleDeleteIssue(issue.id)}
+                          className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm font-medium"
+                        >
                           🗑️ Delete
                         </button>
                       </>
@@ -1234,9 +1279,14 @@ const Dashboard: React.FC = () => {
                             🔒 Status (Admin Only)
                           </button>
                         )}
-                        <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm font-medium">
-                          📧 Contact Reporter
-                        </button>
+                        {isAdmin() ? (
+                          <button 
+                            onClick={() => handleContactReporter(issue)}
+                            className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm font-medium"
+                          >
+                            📧 Contact Reporter
+                          </button>
+                        ) : null}
                       </>
                     )}
                   </div>
@@ -1264,7 +1314,7 @@ const Dashboard: React.FC = () => {
                 : "Try adjusting your filters or search terms to find what you're looking for"}
             </p>
             <div className="flex gap-4 justify-center">
-              {activeTab === "my-issues" ? (
+              {activeTab === "my-issues" && !isAdmin() ? (
                 <button
                   onClick={() => setShowNewIssueModal(true)}
                   className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
@@ -1291,8 +1341,8 @@ const Dashboard: React.FC = () => {
         )}
       </div>
 
-      {/* New Issue Modal */}
-      {showNewIssueModal && (
+      {/* New Issue Modal - Only show for non-admin users */}
+      {showNewIssueModal && !isAdmin() && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-8">
@@ -1675,17 +1725,7 @@ const Dashboard: React.FC = () => {
                       </div>
                     )}
 
-                    <button
-                      type="button"
-                      onClick={addSampleImage}
-                      className="w-full py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors flex items-center justify-center gap-2 text-gray-600 hover:text-blue-600"
-                    >
-                      <span className="text-xl">📷</span>
-                      Add Sample Photo
-                    </button>
-                    <p className="text-xs text-gray-500">
-                      Note: Sample photos are for demonstration. Use the file upload above for real photos.
-                    </p>
+
                   </div>
                 </div>
 
@@ -1815,23 +1855,34 @@ const Dashboard: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900 mb-3">📸 Images</h4>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {selectedIssue.images.map((image, index) => (
-                      <div key={index} className="relative group">
-                        <img
-                          src={image}
-                          alt={`Issue image ${index + 1}`}
-                          className="w-full h-40 object-cover rounded-lg shadow-md group-hover:shadow-lg transition-shadow"
-                        />
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity rounded-lg flex items-center justify-center">
-                          <button
-                            onClick={() => window.open(image, '_blank')}
-                            className="opacity-0 group-hover:opacity-100 bg-white text-gray-800 px-3 py-1 rounded-lg text-sm font-medium transition-opacity"
-                          >
-                            View Full Size
-                          </button>
+                    {selectedIssue.images.map((image, index) => {
+                      // Handle both relative paths and full URLs
+                      // For relative paths (starting with /uploads/), serve from public directory
+                      const imageSrc = image;
+                      const fullImageUrl = image;
+                      
+                      return (
+                        <div key={index} className="relative group">
+                          <img
+                            src={imageSrc}
+                            alt={`Issue image ${index + 1}`}
+                            className="w-full h-40 object-cover rounded-lg shadow-md group-hover:shadow-lg transition-shadow"
+                            onError={(e) => {
+                              console.error(`Failed to load image: ${imageSrc}`);
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity rounded-lg flex items-center justify-center">
+                            <button
+                              onClick={() => window.open(fullImageUrl, '_blank')}
+                              className="opacity-0 group-hover:opacity-100 bg-white text-gray-800 px-3 py-1 rounded-lg text-sm font-medium transition-opacity"
+                            >
+                              View Full Size
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -1840,8 +1891,17 @@ const Dashboard: React.FC = () => {
               <div className="border-t border-gray-200 pt-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
-                      <span>👍</span>
+                    <button 
+                      onClick={() => handleUpvote(selectedIssue.id)}
+                      disabled={votedIssues.has(selectedIssue.id)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                        votedIssues.has(selectedIssue.id)
+                          ? 'bg-green-100 text-green-700 cursor-not-allowed'
+                          : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                      }`}
+                      title={votedIssues.has(selectedIssue.id) ? 'Already voted' : 'Click to upvote'}
+                    >
+                      <span>{votedIssues.has(selectedIssue.id) ? '✅' : '👍'}</span>
                       <span className="font-medium">{selectedIssue.votes || 0} votes</span>
                     </button>
                     
@@ -1873,12 +1933,97 @@ const Dashboard: React.FC = () => {
                     >
                       Close
                     </button>
-                    <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all">
-                      📧 Contact Reporter
-                    </button>
+                    {isAdmin() && (
+                      <button 
+                        onClick={() => handleContactReporter(selectedIssue)}
+                        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all"
+                      >
+                        📧 Contact Reporter
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Reporter Modal */}
+      {showContactModal && contactIssue && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
+                  <span className="text-3xl">📧</span>
+                  Contact Reporter
+                </h2>
+                <button
+                  onClick={closeContactModal}
+                  className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-6 space-y-6">
+              {/* Issue Info */}
+              <div className="bg-blue-50 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 mb-2">Issue: {contactIssue.title}</h3>
+                <p className="text-sm text-gray-600">Reporter: {contactIssue.reportedBy}</p>
+                <p className="text-sm text-gray-600">Location: {contactIssue.location}</p>
+              </div>
+
+              {/* Contact Form */}
+              <form onSubmit={handleContactSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Your Message *
+                  </label>
+                  <textarea
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    placeholder="Write your message to the reporter..."
+                  />
+                </div>
+
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-yellow-600 text-lg">⚠️</span>
+                    <div className="text-sm text-yellow-800">
+                      <p className="font-medium mb-1">Important:</p>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Be respectful and constructive in your message</li>
+                        <li>Include relevant details about the issue</li>
+                        <li>Provide your contact information if needed</li>
+                        <li>This message will be sent to {contactIssue.reportedBy}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-4 pt-4">
+                  <button
+                    type="button"
+                    onClick={closeContactModal}
+                    className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
+                  >
+                    📧 Send Message
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

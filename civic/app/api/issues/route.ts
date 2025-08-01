@@ -292,3 +292,41 @@ export async function PUT(request: NextRequest) {
     );
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const issueId = searchParams.get('id');
+
+    if (!issueId) {
+      return NextResponse.json(
+        { error: 'Issue ID is required' },
+        { status: 400 }
+      );
+    }
+
+    const db = await getDatabase();
+
+    const existingIssue = await db.get('SELECT * FROM issues WHERE id = ?', [issueId]);
+
+    if (!existingIssue) {
+      return NextResponse.json({ error: 'Issue not found' }, { status: 404 });
+    }
+
+    // For now, we are not deleting images from the file system to keep it simple.
+    // In a production app, you'd want to delete the associated files.
+
+    await db.run('DELETE FROM issues WHERE id = ?', [issueId]);
+
+    return NextResponse.json(
+      { message: 'Issue deleted successfully' },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Delete issue error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
