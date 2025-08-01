@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { MapClickHandler } from "../components/MapClickHandler";
+import { MapClickHandler } from "./components/MapClickHandler";
 
 // Dynamically import map components to avoid SSR issues
 const MapContainer = dynamic(

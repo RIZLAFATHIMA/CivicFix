@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
         const timestamp = Date.now();
         const randomSuffix = Math.random().toString(36).substring(2);
         const extension = path.extname(file.name);
-        const filename = ${timestamp}-${randomSuffix}${extension};
+        const filename = `${timestamp}-${randomSuffix}${extension}`;
         
         // Save file
         const filePath = path.join(uploadsDir, filename);
@@ -73,12 +73,12 @@ export async function POST(request: NextRequest) {
         await writeFile(filePath, buffer);
         
         // Store relative path for database
-        imagePaths.push(/uploads/issues/${filename});
+        imagePaths.push(`/uploads/issues/${filename}`);
       }
     }
 
     // Generate issue ID
-    const issueId = ISS${Date.now()};
+    const issueId = `ISS${Date.now()}`;
 
     // Get database connection
     const db = await getDatabase();
